@@ -52,20 +52,20 @@ jobs:
           
           echo "Detected default branch: $DEFAULT_BRANCH"
           
-          # Check if default branch has commits in the last 30 days
+          # Check if default branch has commits in the last 6 months
           SELECTED_BRANCH=""
           SELECTION_REASON=""
           
           if [ -n "$DEFAULT_BRANCH" ]; then
-            RECENT_DEFAULT_COMMITS=$(git rev-list --count --since="30 days ago" upstream/$DEFAULT_BRANCH)
-            echo "Default branch ($DEFAULT_BRANCH) commits in last 30 days: $RECENT_DEFAULT_COMMITS"
+            RECENT_DEFAULT_COMMITS=$(git rev-list --count --since="6 months ago" upstream/$DEFAULT_BRANCH)
+            echo "Default branch ($DEFAULT_BRANCH) commits in last 6 months: $RECENT_DEFAULT_COMMITS"
             
             if [ "$RECENT_DEFAULT_COMMITS" -gt 0 ]; then
               SELECTED_BRANCH="$DEFAULT_BRANCH"
               SELECTION_REASON="Default branch has recent activity"
-              echo "鉁?Using default branch $DEFAULT_BRANCH (has $RECENT_DEFAULT_COMMITS commits in last 30 days)"
+              echo "鉁?Using default branch $DEFAULT_BRANCH (has $RECENT_DEFAULT_COMMITS commits in last 6 months)"
             else
-              echo "脳 Default branch $DEFAULT_BRANCH has no commits in last 30 days, checking other branches..."
+              echo "脳 Default branch $DEFAULT_BRANCH has no commits in last 6 months, checking other branches..."
             fi
           else
             echo "脳 No standard default branch (main/master) found, checking all branches..."
